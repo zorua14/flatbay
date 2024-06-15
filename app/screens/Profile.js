@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import {
   Feather,
@@ -17,16 +16,19 @@ import {
 } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as ImagePicker from "expo-image-picker";
-import * as Progress from "react-native-progress";
 import Gallery from "../components/Gallery";
 import PersonDetails from "../components/PersonDetails";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setProfilePicture } from "../redux/profilePictureSlice";
 const TopTab = createMaterialTopTabNavigator();
 const Profile = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const [image, setImage] = useState(require("../../assets/836.jpg"));
-  const [progress, setProgress] = useState(0.1);
+  //const [image, setImage] = useState(null);
+  const image = useSelector((state) => state.profilePicture);
+  const dispatch = useDispatch();
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -37,7 +39,8 @@ const Profile = () => {
     });
 
     if (!result.canceled) {
-      setImage({ uri: result.uri });
+      //setImage(result.assets[0].uri);
+      dispatch(setProfilePicture(result.assets[0].uri));
     }
   };
 
@@ -65,14 +68,38 @@ const Profile = () => {
         <View style={styles.person}>
           <View style={{ flexDirection: "row" }}>
             <Image
-              source={require("../../assets/836.jpg")}
+              source={{ uri: image }}
               style={{
                 width: 120,
                 height: 120,
                 resizeMode: "contain",
                 borderRadius: 60,
+                right: -15,
+                backgroundColor: "gray",
               }}
             />
+            <TouchableOpacity
+              style={{
+                left: -10,
+                bottom: -10,
+
+                height: 30,
+                width: 30,
+                borderRadius: 15,
+                padding: 3,
+              }}
+            >
+              <Feather
+                name="edit-2"
+                size={24}
+                color="black"
+                onPress={pickImage}
+                style={{
+                  backgroundColor: "#fff",
+                  borderRadius: 10,
+                }}
+              />
+            </TouchableOpacity>
           </View>
           <View
             style={{
@@ -111,7 +138,7 @@ const Profile = () => {
             marginVertical: 10,
           }}
         >
-          <Text style={{ fontSize: 16 }}>25 Years | </Text>
+          <Text style={{ fontSize: 16 }}>22 Years | </Text>
           <Text style={{ fontSize: 16 }}>IT Engineer | </Text>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <MaterialCommunityIcons name="google-maps" size={24} color="red" />

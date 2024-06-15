@@ -1,14 +1,23 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Likes = () => {
   return (
-    <View>
-      <Text>Likes</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <Text>Check Profile Tab</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default Likes;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

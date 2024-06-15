@@ -15,7 +15,7 @@ const PersonDetails = () => {
         <View style={[styles.row, { marginLeft: 10, top: -10 }]}>
           <View style={styles.column}>
             <Text style={styles.item}>Food preferences</Text>
-            <Text style={styles.sectionHeader}>Veg</Text>
+            <Text style={styles.sectionHeader}>Non Veg</Text>
             <Text style={styles.item}>Smoking</Text>
             <Text style={styles.sectionHeader}>Never</Text>
             <Text style={styles.item}>Partying</Text>
@@ -24,9 +24,9 @@ const PersonDetails = () => {
 
           <View style={styles.column}>
             <Text style={styles.item}>Pets</Text>
-            <Text style={styles.sectionHeader}>Dont Mind</Text>
+            <Text style={styles.sectionHeader}>Just Cats</Text>
             <Text style={styles.item}>Drinking</Text>
-            <Text style={styles.sectionHeader}>Occasionally</Text>
+            <Text style={styles.sectionHeader}>Never</Text>
           </View>
         </View>
       </ScrollView>

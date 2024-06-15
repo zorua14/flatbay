@@ -14,7 +14,7 @@ const MyTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
+        tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
           if (route.name === "Home") {
@@ -28,10 +28,21 @@ const MyTabs = () => {
           }
 
           return (
-            <MaterialCommunityIcons name={iconName} size={28} color={color} />
+            <View
+              style={{
+                backgroundColor: focused ? "#574B7B" : "transparent",
+                width: size + 10,
+                height: size + 10,
+                borderRadius: (size + 10) / 2,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <MaterialCommunityIcons name={iconName} size={28} color={color} />
+            </View>
           );
         },
-        tabBarActiveTintColor: "purple",
+        tabBarActiveTintColor: "white",
         tabBarInactiveTintColor: "gray",
         tabBarShowLabel: false,
         headerShown: false,
